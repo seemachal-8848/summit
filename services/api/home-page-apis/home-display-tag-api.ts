@@ -12,7 +12,6 @@ const getDisplaytagsDataFromAPI = async (
   const additionalParams = { fields: JSON.stringify(reqParams) };
 
   const getFeaturedCollectionData = await executeGETAPI(undefined, '', token, additionalParams, `/api/resource/Tag/${collection_name}`);
-
   if (getFeaturedCollectionData?.status === 200 && Object.keys(getFeaturedCollectionData?.data?.data)?.length > 0) {
     const additionalParams = {
       tag: getFeaturedCollectionData?.data?.data?.name,

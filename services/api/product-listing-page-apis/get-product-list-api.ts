@@ -15,7 +15,7 @@ const fetchProductListingFromAPI = async (appName: any, query: any, token: any) 
     limit = CONSTANTS.PRODUCT_COUNT_ON_PRODUCT_CATEGORY_PAGE;
   }
 
-  const category: any = query.url_params.category;
+  const category: any = query.url_params.category || '';
   const email: any = query.url_params.email || '';
 
   // Construct URL parameters

@@ -9,6 +9,7 @@ import { CONSTANTS } from '../../services/config/app-config';
 import fetchStockAvailabilityOfProduct from '../../services/api/product-detail-page-apis/get-product-stock-availability';
 import fetchPinCodesListAPI from '../../services/api/general-apis/get-pin-code-list-api';
 import debounce from 'debounce';
+import { getUserType } from '../../utils/get-user-role';
 type PinCodeTypes = {
   name: string;
 };
@@ -36,6 +37,8 @@ const useProductDetail = () => {
       quantity: productDetailData?.min_order_qty || 1,
     },
   ]);
+  // get roles
+  const userType = getUserType();
   const handleMultipleQtyChange = (index: number, itemCode: string, value: string) => {
     setItemList((prevItemList: any) => {
       if (!Array.isArray(prevItemList)) {
@@ -109,14 +112,20 @@ const useProductDetail = () => {
     }
   };
 
-  // Need to handle min quantity of product
-
   // Need to handle qty increase of product
   const handleQtyModificationOnButtonClick = (actionType: string) => {
     if (actionType === 'increase') {
       setQty(qty + 1);
-    } else if (qty - 1 >= productDetailData?.min_order_qty) {
-      setQty(qty - 1);
+    } else if (actionType === 'decrease') {
+      if (userType === 'B2B') {
+        if (qty > (productDetailData?.min_order_qty ?? 1)) {
+          setQty(qty - 1);
+        }
+      } else {
+        if (qty > 1) {
+          setQty(qty - 1);
+        }
+      }
     }
   };
 

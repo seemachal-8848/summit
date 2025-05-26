@@ -64,6 +64,8 @@ const apiSdkRegistry: any = {
   'get-mechanic-list-api': { method: 'get_mechanic', entity: 'user' },
   'add-mechanic-to-user-api': { method: 'update_mechanic_in_customer', entity: 'user' },
   'get-product-listing-all-filters-api': { method: 'get_filters_without_category', entity: 'filter' },
+  'get-promotional-scheme-items-api': { method: 'get_promotional_scheme_items', entity: 'promotional_scheme' },
+  'get-promotional-scheme-api': { method: 'get_promotional_scheme', entity: 'promotional_scheme' },
 };
 
 export default apiSdkRegistry;
